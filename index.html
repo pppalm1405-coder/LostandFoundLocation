@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* โทนสีขาว-เขียวมิ้นต์ สบายตา */
             --mint-light: #e6f9ec;
             --mint-main: #8bdcba;
             --mint-dark: #5cb892;
@@ -18,276 +17,218 @@
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Prompt', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Prompt', sans-serif; }
+        body { background-color: var(--bg-white); color: var(--text-dark); line-height: 1.6; }
 
-        body {
-            background-color: var(--bg-white);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
+        header { background-color: var(--white); padding: 1rem 5%; box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 1.5rem; font-weight: 600; color: var(--mint-dark); text-decoration: none; }
+        .btn { padding: 0.5rem 1.2rem; border-radius: 50px; border: none; cursor: pointer; font-size: 1rem; font-weight: 500; transition: 0.3s; text-decoration: none; }
+        .btn-outline { background-color: transparent; color: var(--mint-dark); border: 2px solid var(--mint-dark); }
+        .btn-outline:hover { background-color: #e6f9ec; }
+        .btn-primary { background-color: var(--mint-main); color: var(--white); }
+        .btn-primary:hover { background-color: var(--mint-dark); }
+        .btn-danger { background-color: #ff5c5c; color: white; margin-top: 10px;}
 
-        /* Navbar */
-        header {
-            background-color: var(--white);
-            padding: 1rem 5%;
-            box-shadow: var(--shadow);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+        .hero { text-align: center; padding: 4rem 1rem; background: linear-gradient(135deg, var(--white) 0%, #e6f9ec 100%); }
+        .hero h1 { font-size: 2.5rem; color: var(--mint-dark); margin-bottom: 1rem; }
+        .search-bar { max-width: 500px; margin: 2rem auto 0; display: flex; gap: 10px; }
+        .search-bar input { flex: 1; padding: 0.8rem 1.5rem; border: 1px solid #ddd; border-radius: 50px; font-size: 1rem; outline: none; }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--mint-dark);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .container { padding: 3rem 5%; max-width: 1200px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .card { background-color: var(--white); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); transition: 0.3s; }
+        .card-img { width: 100%; height: 200px; object-fit: cover; }
+        .card-body { padding: 1.5rem; }
+        .badge { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.8rem; margin-bottom: 1rem; }
+        .badge.lost { background-color: #ffeaea; color: #ff5c5c; }
+        .badge.found { background-color: #e6f9ec; color: var(--mint-dark); }
+        .empty-state { text-align: center; color: var(--text-gray); grid-column: 1 / -1; padding: 2rem; }
 
-        .nav-buttons .btn {
-            margin-left: 10px;
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 0.5rem 1.2rem;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            color: var(--mint-dark);
-            border: 2px solid var(--mint-dark);
-        }
-
-        .btn-outline:hover {
-            background-color: var(--mint-light);
-        }
-
-        .btn-primary {
-            background-color: var(--mint-main);
-            color: var(--white);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--mint-dark);
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 4rem 1rem;
-            background: linear-gradient(135deg, var(--white) 0%, var(--mint-light) 100%);
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            color: var(--mint-dark);
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            color: var(--text-gray);
-            max-width: 600px;
-            margin: 0 auto 2rem auto;
-        }
-
-        .search-bar {
-            max-width: 500px;
-            margin: 0 auto;
-            display: flex;
-            gap: 10px;
-        }
-
-        .search-bar input {
-            flex: 1;
-            padding: 0.8rem 1.5rem;
-            border: 1px solid #ddd;
-            border-radius: 50px;
-            font-size: 1rem;
-            outline: none;
-        }
-
-        .search-bar input:focus {
-            border-color: var(--mint-main);
-        }
-
-        /* Content Container */
-        .container {
-            padding: 3rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--text-dark);
-        }
-
-        /* Cards Grid */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background-color: var(--white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card-img {
-            width: 100%;
-            height: 200px;
-            background-color: #f0f0f0;
-            object-fit: cover;
-        }
-
-        .card-body {
-            padding: 1.5rem;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-
-        .badge.lost {
-            background-color: #ffeaea;
-            color: #ff5c5c;
-        }
-
-        .badge.found {
-            background-color: var(--mint-light);
-            color: var(--mint-dark);
-        }
-
-        .card-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-text {
-            color: var(--text-gray);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--white);
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-gray);
-            border-top: 1px solid #eee;
-            margin-top: 2rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            header {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .search-bar {
-                flex-direction: column;
-            }
-        }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; justify-content: center; align-items: center; }
+        .modal-content { background: white; padding: 2rem; border-radius: 12px; width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto; }
+        .modal h2 { margin-bottom: 1rem; color: var(--mint-dark); }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+        .form-group input { width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; }
+        
+        /* ปุ่มลบข้อมูลทั้งหมด (สำหรับทดสอบ) */
+        .clear-btn-container { text-align: center; margin-top: 3rem; }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="#" class="logo">
-            🔍 Lost & Found
-        </a>
+        <a href="#" class="logo">🔍 gxHo</a>
         <div class="nav-buttons">
-            <a href="#report-lost" class="btn btn-outline">แจ้งของหาย</a>
-            <a href="#report-found" class="btn btn-primary">แจ้งเก็บของได้</a>
+            <button onclick="openModal('lost')" class="btn btn-outline">แจ้งของหาย</button>
+            <button onclick="openModal('found')" class="btn btn-primary">แจ้งเก็บของได้</button>
         </div>
     </header>
 
     <section class="hero">
         <h1>ศูนย์รวมแจ้งของหาย-เก็บได้</h1>
-        <p>พื้นที่สำหรับช่วยเหลือและแบ่งปัน ค้นหาของที่คุณทำหาย หรือประกาศตามหาเจ้าของของที่คุณเก็บได้ เพื่อให้ทุกสิ่งกลับคืนสู่เจ้าของอย่างปลอดภัย</p>
         <div class="search-bar">
-            <input type="text" placeholder="ค้นหาสิ่งของ เช่น กระเป๋าสตางค์, กุญแจรถ...">
-            <button class="btn btn-primary">ค้นหา</button>
+            <input type="text" id="searchInput" onkeyup="searchItems()" placeholder="ค้นหาสิ่งของ เช่น กระเป๋าสตางค์, กุญแจ...">
         </div>
     </section>
 
     <main class="container">
-        <h2 class="section-title">ประกาศล่าสุด</h2>
-        <div class="grid">
-            
-            <div class="card">
-                <img src="https://via.placeholder.com/400x300/f0f0f0/cccccc?text=Wallet" alt="กระเป๋าสตางค์" class="card-img">
-                <div class="card-body">
-                    <span class="badge lost">ตามหาของหาย</span>
-                    <h3 class="card-title">กระเป๋าสตางค์สีดำ</h3>
-                    <p class="card-text">📍 สถานที่: ห้างสรรพสินค้าใจกลางเมือง (โซนศูนย์อาหาร)</p>
-                    <p class="card-text">🕒 วันที่: 18 ก.พ. 2026</p>
-                    <a href="#" style="color: var(--mint-dark); text-decoration: none; font-weight: 500; display: inline-block; margin-top: 10px;">ดูรายละเอียด &rarr;</a>
-                </div>
+        <h2 style="margin-bottom: 2rem; text-align: center;">ประกาศทั้งหมด</h2>
+        <div class="grid" id="itemsGrid">
             </div>
 
-            <div class="card">
-                <img src="https://via.placeholder.com/400x300/f0f0f0/cccccc?text=Keys" alt="กุญแจรถ" class="card-img">
-                <div class="card-body">
-                    <span class="badge found">เก็บของได้</span>
-                    <h3 class="card-title">กุญแจรถยนต์ Honda</h3>
-                    <p class="card-text">📍 สถานที่: ลานจอดรถสถานีรถไฟฟ้า</p>
-                    <p class="card-text">🕒 วันที่: 17 ก.พ. 2026</p>
-                    <a href="#" style="color: var(--mint-dark); text-decoration: none; font-weight: 500; display: inline-block; margin-top: 10px;">ดูรายละเอียด &rarr;</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://via.placeholder.com/400x300/f0f0f0/cccccc?text=Cat" alt="แมวหาย" class="card-img">
-                <div class="card-body">
-                    <span class="badge lost">ตามหาสัตว์เลี้ยง</span>
-                    <h3 class="card-title">แมวส้ม พันธุ์ไทย</h3>
-                    <p class="card-text">📍 สถานที่: บริเวณหมู่บ้านย่านลาดพร้าว</p>
-                    <p class="card-text">🕒 วันที่: 16 ก.พ. 2026</p>
-                    <a href="#" style="color: var(--mint-dark); text-decoration: none; font-weight: 500; display: inline-block; margin-top: 10px;">ดูรายละเอียด &rarr;</a>
-                </div>
-            </div>
-
+        <div class="clear-btn-container">
+            <button onclick="clearAllData()" class="btn btn-danger">ลบข้อมูลการทดสอบทั้งหมด (Reset)</button>
         </div>
     </main>
 
-    <footer>
-        <p>&copy; 2026 Lost & Found Web App. สงวนลิขสิทธิ์</p>
-        <p style="font-size: 0.9rem; margin-top: 5px;">สร้างสรรค์เพื่อสังคมที่น่าอยู่ 💚</p>
-    </footer>
+    <div id="formModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">แจ้งข้อมูล</h2>
+            <form id="reportForm" onsubmit="saveData(event)">
+                <input type="hidden" id="reportType">
+                
+                <div class="form-group">
+                    <label>ชื่อสิ่งของ</label>
+                    <input type="text" id="itemTitle" required placeholder="เช่น กุญแจรถยนต์ Honda">
+                </div>
+                
+                <div class="form-group">
+                    <label>สถานที่ (ที่หาย หรือ ที่พบ)</label>
+                    <input type="text" id="itemLocation" required placeholder="ระบุสถานที่ให้ชัดเจน">
+                </div>
+                
+                <div class="form-group">
+                    <label>วันที่</label>
+                    <input type="date" id="itemDate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>อัปโหลดรูปภาพ</label>
+                    <input type="file" id="itemImage" accept="image/*" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">บันทึกข้อมูลลงเว็บ</button>
+                <button type="button" class="btn btn-danger" style="width: 100%;" onclick="closeModal()">ยกเลิก</button>
+            </form>
+        </div>
+    </div>
 
+    <script>
+        // --- 1. โหลดข้อมูลจาก LocalStorage ทันทีที่เปิดเว็บ ---
+        window.onload = function() {
+            loadItems();
+        };
+
+        // --- 2. จัดการ Modal ---
+        function openModal(type) {
+            document.getElementById('formModal').style.display = 'flex';
+            document.getElementById('reportType').value = type;
+            document.getElementById('modalTitle').innerText = type === 'lost' ? 'แจ้งของหาย' : 'แจ้งเก็บของได้';
+        }
+
+        function closeModal() {
+            document.getElementById('formModal').style.display = 'none';
+            document.getElementById('reportForm').reset();
+        }
+
+        // --- 3. บันทึกข้อมูลลง LocalStorage (เซฟลงเครื่อง) ---
+        function saveData(event) {
+            event.preventDefault();
+
+            let type = document.getElementById('reportType').value;
+            let title = document.getElementById('itemTitle').value;
+            let location = document.getElementById('itemLocation').value;
+            let date = document.getElementById('itemDate').value;
+            let fileInput = document.getElementById('itemImage');
+
+            // แปลงไฟล์รูปเป็น Base64 String เพื่อให้เก็บในเว็บได้
+            let reader = new FileReader();
+            reader.readAsDataURL(fileInput.files[0]);
+            
+            reader.onload = function () {
+                let base64Image = reader.result;
+
+                let newItem = {
+                    id: Date.now(), // สร้าง ID ไม่ซ้ำกันด้วยเวลา
+                    type: type,
+                    title: title,
+                    location: location,
+                    date: date,
+                    image: base64Image
+                };
+
+                // ดึงข้อมูลเก่าออกมาจาก LocalStorage ก่อน
+                let existingItems = JSON.parse(localStorage.getItem('gxho_items')) || [];
+                
+                // เพิ่มของใหม่เข้าไป (ไว้บนสุด)
+                existingItems.unshift(newItem);
+
+                // เซฟกลับลงไปใน LocalStorage
+                try {
+                    localStorage.setItem('gxho_items', JSON.stringify(existingItems));
+                    alert("บันทึกข้อมูลสำเร็จ!");
+                    closeModal();
+                    loadItems(); // โหลดหน้าจอใหม่ให้โชว์ของที่เพิ่งแอด
+                } catch (e) {
+                    alert("พื้นที่เก็บข้อมูลในเบราว์เซอร์เต็ม! (รูปภาพอาจมีขนาดใหญ่เกินไป)");
+                }
+            };
+        }
+
+        // --- 4. ดึงข้อมูลมาแสดงผลเป็น Card ---
+        function loadItems() {
+            let itemsGrid = document.getElementById('itemsGrid');
+            let items = JSON.parse(localStorage.getItem('gxho_items')) || [];
+            
+            itemsGrid.innerHTML = ''; // ล้างของเก่าออกก่อน
+
+            if (items.length === 0) {
+                itemsGrid.innerHTML = '<div class="empty-state">ยังไม่มีประกาศในขณะนี้ ลองเพิ่มประกาศดูสิ!</div>';
+                return;
+            }
+
+            items.forEach(data => {
+                let badgeClass = data.type === 'lost' ? 'lost' : 'found';
+                let badgeText = data.type === 'lost' ? 'ตามหาของหาย' : 'เก็บของได้';
+
+                let cardHTML = `
+                <div class="card item-card">
+                    <img src="${data.image}" class="card-img" alt="ภาพสิ่งของ">
+                    <div class="card-body">
+                        <span class="badge ${badgeClass}">${badgeText}</span>
+                        <h3 class="card-title">${data.title}</h3>
+                        <p>📍 สถานที่: ${data.location}</p>
+                        <p>🕒 วันที่: ${data.date}</p>
+                    </div>
+                </div>`;
+                
+                itemsGrid.innerHTML += cardHTML;
+            });
+        }
+
+        // --- 5. ระบบค้นหา ---
+        function searchItems() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('item-card');
+
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].querySelector('.card-title').innerText.toLowerCase();
+                if (title.includes(input)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        // --- 6. ลบข้อมูลทั้งหมด (เผื่อต้องการเคลียร์พื้นที่) ---
+        function clearAllData() {
+            if(confirm("คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลประกาศทั้งหมดในเครื่องนี้?")) {
+                localStorage.removeItem('gxho_items');
+                loadItems();
+            }
+        }
+    </script>
 </body>
 </html>
