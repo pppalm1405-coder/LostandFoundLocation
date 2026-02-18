@@ -1,1 +1,293 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost & Found | ศูนย์รวมแจ้งของหาย-เก็บได้</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* โทนสีขาว-เขียวมิ้นต์ สบายตา */
+            --mint-light: #e6f9ec;
+            --mint-main: #8bdcba;
+            --mint-dark: #5cb892;
+            --bg-white: #fafafa;
+            --text-dark: #333333;
+            --text-gray: #666666;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        header {
+            background-color: var(--white);
+            padding: 1rem 5%;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--mint-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-buttons .btn {
+            margin-left: 10px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--mint-dark);
+            border: 2px solid var(--mint-dark);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--mint-light);
+        }
+
+        .btn-primary {
+            background-color: var(--mint-main);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--mint-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: linear-gradient(135deg, var(--white) 0%, var(--mint-light) 100%);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--mint-dark);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .search-bar {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 0.8rem 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-bar input:focus {
+            border-color: var(--mint-main);
+        }
+
+        /* Content Container */
+        .container {
+            padding: 3rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        /* Cards Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            background-color: #f0f0f0;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .badge.lost {
+            background-color: #ffeaea;
+            color: #ff5c5c;
+        }
+
+        .badge.found {
+            background-color: var(--mint-light);
+            color: var(--mint-dark);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-text {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-gray);
+            border-top: 1px solid #eee;
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .search-bar {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">
+            🔍 Lost & Found
+        </a>
+        <div class="nav-buttons">
+            <a href="#report-lost" class="btn btn-outline">แจ้งของหาย</a>
+            <a href="#report-found" class="btn btn-primary">แจ้งเก็บของได้</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>ศูนย์รวมแจ้งของหาย-เก็บได้</h1>
+        <p>พื้นที่สำหรับช่วยเหลือและแบ่งปัน ค้นหาของที่คุณทำหาย หรือประกาศตามหาเจ้าของของที่คุณเก็บได้ เพื่อให้ทุกสิ่งกลับคืนสู่เจ้าของอย่างปลอดภัย</p>
+        <div class="search-bar">
+            <input type="text" placeholder="ค้นหาสิ่งของ เช่น กระเป๋าสตางค์, กุญแจรถ...">
+            <button class="btn btn-primary">ค้นหา</button>
+        </div>
+    </section>
+
+    <main class="container">
+        <h2 class="section-title">ประกาศล่าสุด</h2>
+        <div class="grid">
+            
+            <div class="card">
+                <img src="https://via.placeholder.com/400x300/f0f0f0/cccccc?text=Wallet" alt="กระเป๋าสตางค์" class="card-img">
+                <div class="card-body">
+                    <span class="badge lost">ตามหาของหาย</span>
+                    <h3 class="card-title">กระเป๋าสตางค์สีดำ</h3>
+                    <p class="card-text">📍 สถานที่: ห้างสรรพสินค้าใจกลางเมือง (โซนศูนย์อาหาร)</p>
+                    <p class="card-text">🕒 วันที่: 18 ก.พ. 2026</p>
+                    <a href="#" style="color: var(--mint-dark); text-decoration: none; font-weight: 500; display: inline-block; margin-top: 10px;">ดูรายละเอียด &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://via.placeholder.com/400x300/f0f0f0/cccccc?text=Keys" alt="กุญแจรถ" class="card-img">
+                <div class="card-body">
+                    <span class="badge found">เก็บของได้</span>
+                    <h3 class="card-title">กุญแจรถยนต์ Honda</h3>
+                    <p class="card-text">📍 สถานที่: ลานจอดรถสถานีรถไฟฟ้า</p>
+                    <p class="card-text">🕒 วันที่: 17 ก.พ. 2026</p>
+                    <a href="#" style="color: var(--mint-dark); text-decoration: none; font-weight: 500; display: inline-block; margin-top: 10px;">ดูรายละเอียด &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://via.placeholder.com/400x300/f0f0f0/cccccc?text=Cat" alt="แมวหาย" class="card-img">
+                <div class="card-body">
+                    <span class="badge lost">ตามหาสัตว์เลี้ยง</span>
+                    <h3 class="card-title">แมวส้ม พันธุ์ไทย</h3>
+                    <p class="card-text">📍 สถานที่: บริเวณหมู่บ้านย่านลาดพร้าว</p>
+                    <p class="card-text">🕒 วันที่: 16 ก.พ. 2026</p>
+                    <a href="#" style="color: var(--mint-dark); text-decoration: none; font-weight: 500; display: inline-block; margin-top: 10px;">ดูรายละเอียด &rarr;</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Lost & Found Web App. สงวนลิขสิทธิ์</p>
+        <p style="font-size: 0.9rem; margin-top: 5px;">สร้างสรรค์เพื่อสังคมที่น่าอยู่ 💚</p>
+    </footer>
+
+</body>
+</html>
